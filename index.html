@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>月¥30,000で始めるGoogle広告 ── 30日間完全ロードマップ｜縫製工場向け</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2744;
+    --navy-light: #243360;
+    --gold: #c9a84c;
+    --gold-light: #e8cc7a;
+    --white: #ffffff;
+    --off-white: #f8f6f0;
+    --gray-light: #f0eee8;
+    --gray: #888;
+    --text: #2c2c2c;
+    --week1: #1a6b4a;
+    --week2: #1a4a7a;
+    --week3: #6b3a1a;
+    --week4: #4a1a6b;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--off-white);
+  }
+
+  /* ===== PRINT STYLES ===== */
+  @page {
+    size: A4;
+    margin: 15mm 12mm 15mm 12mm;
+  }
+
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .avoid-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .section-card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+      box-shadow: none !important;
+      border: 1px solid #ccc !important;
+    }
+    .week-block {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    th, td { border: 1px solid #999 !important; }
+    a { color: var(--navy) !important; text-decoration: none; }
+    .hero { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .week-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .kpi-table th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cover-meta { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  /* ===== HERO / COVER ===== */
+  .hero {
+    background: var(--navy);
+    color: white;
+    padding: 48px 32px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.12);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.08);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    color: white;
+  }
+  .hero h1 span { color: var(--gold-light); }
+  .hero-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+  .cover-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4px;
+  }
+  .cover-meta-item {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 6px;
+    padding: 10px 16px;
+    min-width: 140px;
+  }
+  .cover-meta-item .label {
+    font-size: 10px;
+    color: var(--gold-light);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .cover-meta-item .value {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+  }
+
+  /* ===== SECTION CARD ===== */
+  .section-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(26,39,68,0.08);
+    margin: 20px 0;
+    overflow: hidden;
+  }
+  .section-header {
+    background: var(--navy);
+    color: white;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-header .icon { font-size: 18px; }
+  .section-header h2 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .section-body { padding: 20px 24px; }
+
+  /* ===== WEEK BLOCKS ===== */
+  .week-block {
+    border: 1.5px solid #e8e4dc;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    color: white;
+    font-weight: 700;
+  }
+  .week-header.w1 { background: var(--week1); }
+  .week-header.w2 { background: var(--week2); }
+  .week-header.w3 { background: var(--week3); }
+  .week-header.w4 { background: var(--week4); }
+
+  .week-badge {
+    background: rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .week-title { font-size: 14px; }
+  .week-phase {
+    font-size: 10px;
+    opacity: 0.85;
+    background: rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  .week-body { padding: 14px 18px; }
+
+  /* ===== CHECKLIST ===== */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    border-bottom: 1px dashed #ede9e0;
+    font-size: 13px;
+    line-height: 1.55;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 4px;
+    padding-left: 4px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li:hover { background: #faf8f4; }
+  .checklist li.checked { opacity: 0.55; }
+  .checklist li.checked .check-box { background: var(--gold); border-color: var(--gold); color: white; }
+  .checklist li.checked .item-main { text-decoration: line-through; color: #999; }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 2px solid #c8c0b0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: transparent;
+    margin-top: 1px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .item-main { flex: 1; }
+  .item-main strong { color: var(--navy); font-weight: 700; }
+  .item-sub {
+    font-size: 11px;
+    color: var(--gray);
+    display: block;
+    margin-top: 2px;
+  }
+  .item-badge {
+    font-size: 10px;
+    background: #f0ede5;
+    color: #7a6a50;
+    border-radius: 4px;
+    padding: 1px 7px;
+    white-space: nowrap;
+    margin-top: 2px;
+    align-self: flex-start;
+  }
+  .item-badge.gold { background: #fdf3d8; color: #8a6900; font-weight: 700; border: 1px solid #e8c84a; }
+  .item-badge.green { background: #e8f5ee; color: #1a6b4a; }
+  .item-badge.blue { background: #e8f0fb; color: #1a4a7a; }
+
+  /* ===== KPI TABLE ===== */
+  .kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  .kpi-table th {
+    background: var(--navy);
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  .kpi-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #ede9e0;
+    vertical-align: top;
+  }
+  .kpi-table tr:nth-child(even) td { background: #faf8f4; }
+  .kpi-table tr:last-child td { border-bottom: none; }
+  .kpi-num {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 13px;
+  }
+  .kpi-tag {
+    display: inline-block;
+    font-size: 10px;
+    background: #e8f0fb;
+    color: #1a4a7a;
+    border-radius: 4px;
+    padding: 1px 6px;
+    margin-left: 4px;
+  }
+
+  /* ===== RECORD TABLE ===== */
+  .record-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .record-table th {
+    background: var(--navy-light);
+    color: white;
+    padding: 8px 10px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .record-table th:first-child { text-align: left; }
+  .record-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #ede9e0;
+    text-align: center;
+    color: #555;
+    font-size: 11px;
+  }
+  .record-table td:first-child { text-align: left; font-weight: 600; color: var(--text); }
+  .record-table tr:nth-child(even) td { background: #faf8f4; }
+  .record-table .target-col {
+    background: #fdf3d8 !important;
+    color: #8a6900;
+    font-weight: 700;
+  }
+  .record-table .input-cell {
+    background: #fff !important;
+    border: 1px dashed #c8c0b0;
+    min-width: 60px;
+  }
+
+  /* ===== KEYWORD TABLE ===== */
+  .kw-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .kw-table th {
+    background: var(--navy);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .kw-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ede9e0;
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+  .kw-table tr:nth-child(even) td { background: #faf8f4; }
+  .kw-table tr:last-child td { border-bottom: none; }
+  .kw-pill {
+    display: inline-block;
+    background: #e8f0fb;
+    color: var(--navy);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 1px 0;
+  }
+  .kw-pill.exclude {
+    background: #fde8e8;
+    color: #8a1a1a;
+  }
+  .cpc-val { font-weight: 700; color: var(--navy); }
+
+  /* ===== FLOW CHART ===== */
+  .flow-box {
+    border: 2px solid var(--navy);
+    border-radius: 8px;
+    padding: 10px 14px;
+    background: white;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+  }
+  .flow-arrow {
+    text-align: center;
+    color: var(--gold);
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 2px 0;
+  }
+  .flow-row {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    margin: 6px 0;
+  }
+  .flow-condition {
+    background: #fdf3d8;
+    border: 1.5px solid var(--gold);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    flex: 1;
+  }
+  .flow-condition .cond-label {
+    font-weight: 700;
+    color: #8a6900;
+    margin-bottom: 4px;
+    font-size: 12px;
+  }
+  .flow-condition .cond-action {
+    color: #555;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .flow-good {
+    background: #e8f5ee;
+    border: 1.5px solid var(--week1);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    flex: 1;
+  }
+  .flow-good .cond-label { color: var(--week1); font-weight: 700; margin-bottom: 4px; font-size: 12px; }
+  .flow-good .cond-action { color: #555; font-size: 11px; line-height: 1.5; }
+
+  /* ===== FAILURE CARDS ===== */
+  .failure-item {
+    border: 1.5px solid #ede9e0;
+    border-left: 4px solid #d9534f;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    background: white;
+  }
+  .failure-item:last-child { margin-bottom: 0; }
+  .failure-title {
+    font-weight: 700;
+    color: #c0392b;
+    font-size: 13px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .failure-body { font-size: 12px; color: #555; line-height: 1.6; }
+  .failure-solution {
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px dashed #ede9e0;
+    font-size: 11.5px;
+    color: var(--week1);
+    font-weight: 500;
+  }
+  .failure-solution::before { content: '✅ 解決策：'; font-weight: 700; }
+
+  /* ===== INFO BOX ===== */
+  .info-box {
+    background: #e8f0fb;
+    border-left: 4px solid var(--week2);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 12.5px;
+    margin: 14px 0;
+    line-height: 1.6;
+  }
+  .info-box strong { color: var(--week2); }
+
+  .gold-box {
+    background: #fdf3d8;
+    border-left: 4px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 12.5px;
+    margin: 14px 0;
+    line-height: 1.6;
+  }
+  .gold-box strong { color: #8a6900; }
+
+  /* ===== BUDGET CALC ===== */
+  .calc-box {
+    background: var(--navy);
+    color: white;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 14px 0;
+  }
+  .calc-box h4 { color: var(--gold-light); margin-bottom: 10px; font-size: 13px; }
+  .calc-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 6px 0;
+    font-size: 12.5px;
+  }
+  .calc-label { color: rgba(255,255,255,0.7); min-width: 130px; font-size: 12px; }
+  .calc-val { color: var(--gold-light); font-weight: 700; font-size: 14px; }
+  .calc-divider { border: none; border-top: 1px solid rgba(255,255,255,0.15); margin: 10px 0; }
+  .calc-total .calc-val { font-size: 18px; color: white; }
+
+  /* ===== MISC ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 20px; }
+    .section-header h2 { font-size: 13px; }
+    .cover-meta { flex-direction: column; }
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 20px;
+    padding: 3px 10px;
+    letter-spacing: 0.05em;
+  }
+  .badge-new { background: var(--gold); color: var(--navy); }
+  .badge-btob { background: var(--navy); color: white; }
+
+  .sub-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    padding: 6px 0 8px;
+    margin-top: 14px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+  }
+  .note { font-size: 11px; color: #999; margin-top: 6px; }
+
+  .footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    margin-top: 30px;
+  }
+  .footer strong { color: var(--gold-light); font-size: 13px; }
+
+  .print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--navy);
+    color: white;
+    border: 2px solid var(--gold);
+    border-radius: 30px;
+    padding: 12px 22px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(26,39,68,0.25);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 999;
+    transition: all 0.2s;
+  }
+  .print-btn:hover { background: var(--navy-light); transform: translateY(-2px); }
+  @media print { .print-btn { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- PRINT BUTTON -->
+<button class="print-btn no-print" onclick="window.print()">🖨️ PDFで保存 / 印刷</button>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">🧵 TOKYO SETAGAYA · SEWING FACTORY · GOOGLE ADS GUIDE</div>
+    <h1>月<span>¥30,000</span>で始めるGoogle広告<br>── 30日間完全ロードマップ</h1>
+    <div class="hero-sub">
+      東京都世田谷区の縫製工場（アパレルOEM・BtoB）向け<br>
+      月3〜5件の新規OEM問い合わせ獲得を目指す実践ガイド
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="label">📅 対象期間</span>
+        <span class="value">30日間</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="label">💰 月額予算</span>
+        <span class="value">¥30,000</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="label">🎯 目標CV数</span>
+        <span class="value">月3〜5件</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="label">📍 対象エリア</span>
+        <span class="value">東京・首都圏</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== GOOGLE PROMO ===== -->
+<div class="section-card avoid-break">
+  <div class="section-header">
+    <span class="icon">🎁</span>
+    <h2>Googleプロモーション：新規広告主向け特典</h2>
+  </div>
+  <div class="section-body">
+    <div class="gold-box">
+      <strong>🎉 新規広告主限定オファー</strong><br>
+      広告費 <strong>¥67,000</strong> を使うと、<strong>¥67,000分の追加クレジット</strong>がもらえます。<br>
+      ＝ 実質 <strong>¥134,000</strong> 分の広告配信が可能に！（新規の広告主様のみ対象・利用規約が適用されます）
+    </div>
+    <div class="calc-box avoid-break">
+      <h4>💡 初月シミュレーション（プロモクレジット活用時）</h4>
+      <div class="calc-row">
+        <span class="calc-label">自己負担予算</span>
+        <span class="calc-val">¥67,000</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">Googleクレジット</span>
+        <span class="calc-val">+ ¥67,000</span>
+      </div>
+      <hr class="calc-divider">
+      <div class="calc-row calc-total">
+        <span class="calc-label">実質利用可能額</span>
+        <span class="calc-val">¥134,000</span>
+      </div>
+      <div class="calc-row" style="margin-top:10px;">
+        <span class="calc-label">平均CPC（¥350想定）</span>
+        <span class="calc-val">約383クリック</span>
+      </div>
+      <div class="calc-row">
+        <span class="calc-label">CV率2〜3%換算</span>
+        <span class="calc-val">約8〜11件の問い合わせ期待</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WEEK 1 ===== -->
+<div class="section-card">
+  <div class="section-header">
+    <span class="icon">📋</span>
+    <h2>30日間チェックリスト ── Week別実行スケジュール</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="week-block avoid-break">
+      <div class="week-header w1">
+        <span class="week-badge">Week 1</span>
+        <span class="week-title">Day 1〜7｜準備・設定フェーズ</span>
+        <span class="week-phase">🔧 SETUP</span>
+      </div>
+      <div class="week-body">
+        <div class="info-box">
+          <strong>この週のゴール：</strong>広告配信を正しく開始できる環境を整える。<br>
+          焦って広告を出すより、<strong>設定の質が後の費用対効果を8割決める</strong>と言われています。
+        </div>
+        <ul class="checklist" id="cl1">
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>Googleアカウント開設・Google広告管理画面にログイン</strong>
+              <span class="item-sub">ads.google.com にアクセスし、ビジネス用Googleアカウントで開設</span>
+            </div>
+            <span class="item-badge">Day 1</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>プロモクレジット（¥67,000）の適用を確認</strong>
+              <span class="item-sub">新規広告主向け特典。管理画面の「お支払い」→「プロモーション」から確認</span>
+            </div>
+            <span class="item-badge gold">¥67,000特典</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>コンバージョントラッキングの設定（問い合わせフォーム送信）</strong>
+              <span class="item-sub">どの広告が問い合わせにつながったかを把握するために必須。Googleタグの設置を確認</span>
+            </div>
+            <span class="item-badge blue">最重要</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>キャンペーン目的を「リード（問い合わせ獲得）」に設定</strong>
+              <span class="item-sub">目的の設定がAI最適化の方向性を決める。「販売」「認知」は選ばない</span>
+            </div>
+            <span class="item-badge">Day 2</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>キーワードリスト作成（推奨20〜30語）</strong>
+              <span class="item-sub">顕在層キーワード中心。業界専門用語を活用（例：OEM縫製、小ロット縫製、アパレル工場 東京）</span>
+            </div>
+            <span class="item-badge">Day 2〜3</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>除外キーワードの設定（無駄クリック防止）</strong>
+              <span class="item-sub">「縫製 やり方」「ミシン 修理」「型紙 独学」「縫製 求人」等を除外リストに追加</span>
+            </div>
+            <span class="item-badge blue">コスト削減</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>広告文の作成（見出し3本 × 説明文2本）</strong>
+              <span class="item-sub">例：見出し「世田谷の縫製工場 / 小ロットOEM対応 / MADE IN JAPAN品質」、説明文「1枚からのサンプル製作〜量産まで。アパレルブランド立ち上げも支援します」</span>
+            </div>
+            <span class="item-badge">Day 3〜4</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>広告文に「法人向け・BtoB向け」の旨を明記</strong>
+              <span class="item-sub">個人の一般消費者のクリックを防ぎ、無駄な広告費を削減する</span>
+            </div>
+            <span class="item-badge blue">BtoB必須</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>地域ターゲティング設定（東京・神奈川・埼玉・千葉）</strong>
+              <span class="item-sub">アパレルブランド・デザイナーが集中する首都圏に絞る。全国配信は予算の無駄になりやすい</span>
+            </div>
+            <span class="item-badge">Day 4</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>1日の予算を¥1,000に設定・入札戦略は「手動CPC」</strong>
+              <span class="item-sub">初期はAI自動入札よりも手動で調整。データが50件以上たまったら自動化に切り替え</span>
+            </div>
+            <span class="item-badge">Day 5</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>ランディングページ（LP）の最終確認</strong>
+              <span class="item-sub">スマホで3秒以内に「縫製OEMの工場」と分かるか？問い合わせボタンが目立つか？を確認</span>
+            </div>
+            <span class="item-badge">Day 6〜7</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>広告を配信開始・初日の表示確認</strong>
+              <span class="item-sub">Googleで対象キーワードを検索し、自社広告が表示されるか確認する</span>
+            </div>
+            <span class="item-badge green">配信スタート</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="week-block avoid-break">
+      <div class="week-header w2">
+        <span class="week-badge">Week 2</span>
+        <span class="week-title">Day 8〜14｜ファーストデータ収集フェーズ</span>
+        <span class="week-phase">📊 DATA</span>
+      </div>
+      <div class="week-body">
+        <div class="info-box">
+          <strong>この週のゴール：</strong>データを集め、最初の改善ポイントを発見する。<br>
+          「何がうまくいっていないか」を数字で把握することが最優先です。
+        </div>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>毎日の確認：表示回数・クリック数・CTR・消化費用をチェック</strong>
+              <span class="item-sub">管理画面の「キャンペーン」タブで毎朝5分確認する習慣をつける</span>
+            </div>
+            <span class="item-badge">毎日</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>検索語句レポートの確認（週2回以上）</strong>
+              <span class="item-sub">「キーワード」→「検索語句」で実際に検索されたワードを確認。不要な語句を除外リストに追加</span>
+            </div>
+            <span class="item-badge">週2回</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>CTRが1%未満の広告グループの広告文を見直し</strong>
+              <span class="item-sub">CTR 1%未満は「ユーザーの検索意図とズレている」サイン。見出しのキーワードを変更する</span>
+            </div>
+            <span class="item-badge">Day 10〜11</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>品質スコアの確認（目標：7以上）</strong>
+              <span class="item-sub">「キーワード」タブの列に「品質スコア」を追加。スコアが高いほどクリック単価が下がる</span>
+            </div>
+            <span class="item-badge">Day 12〜13</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>無効クリック・異常な費用消化の監視</strong>
+              <span class="item-sub">1日で予算が急消化されていないか確認。競合の悪意あるクリックの可能性も疑う</span>
+            </div>
+            <span class="item-badge">毎日</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>Week 1 の振り返りメモを記録</strong>
+              <span class="item-sub">よくクリックされたキーワード・されなかったキーワードをリスト化しておく</span>
+            </div>
+            <span class="item-badge">Day 14</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div class="week-block avoid-break">
+      <div class="week-header w3">
+        <span class="week-badge">Week 3</span>
+        <span class="week-title">Day 15〜21｜最適化フェーズ</span>
+        <span class="week-phase">⚙️ OPTIMIZE</span>
+      </div>
+      <div class="week-body">
+        <div class="info-box">
+          <strong>この週のゴール：</strong>データをもとに「勝ちパターン」を見つけ、予算配分を最適化する。<br>
+          中間地点で一度立ち止まり、冷静に数字を見ることが重要です。
+        </div>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>コンバージョン（問い合わせ）につながったキーワードへ入札単価を引き上げ</strong>
+              <span class="item-sub">CVのあったキーワードは入札単価を10〜30%引き上げ、露出機会を増やす</span>
+            </div>
+            <span class="item-badge green">予算集中</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>14日間クリックゼロのキーワードを一時停止</strong>
+              <span class="item-sub">全く反応のないキーワードに予算を使わない。後で再検討できるよう「停止」にする（削除しない）</span>
+            </div>
+            <span class="item-badge">Day 15〜16</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>広告文ABテストの開始（2パターン作成・同時配信）</strong>
+              <span class="item-sub">見出しのパターンA「小ロットOEM対応」vs パターンB「サンプル1枚から相談可能」で比較</span>
+            </div>
+            <span class="item-badge blue">ABテスト</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>ランディングページの直帰率確認（目標：60%以下）</strong>
+              <span class="item-sub">Googleアナリティクスで確認。直帰率が高い場合はLPのファーストビューを改善する</span>
+            </div>
+            <span class="item-badge">Day 17〜18</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>広告表示オプションの追加（サイトリンク・電話番号・住所）</strong>
+              <span class="item-sub">表示オプションを追加するだけでCTRが10〜30%改善する場合がある。無料で設定可能</span>
+            </div>
+            <span class="item-badge green">CTR改善</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>中間コンバージョン数を集計・目標ペースの確認</strong>
+              <span class="item-sub">21日時点で月目標3〜5件の60%（2〜3件）を達成できているか確認</span>
+            </div>
+            <span class="item-badge">Day 21</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div class="week-block avoid-break">
+      <div class="week-header w4">
+        <span class="week-badge">Week 4</span>
+        <span class="week-title">Day 22〜30｜検証・改善フェーズ</span>
+        <span class="week-phase">📈 REVIEW</span>
+      </div>
+      <div class="week-body">
+        <div class="info-box">
+          <strong>この週のゴール：</strong>1ヶ月の成果を数値で検証し、翌月の改善計画を立てる。<br>
+          「なんとなく良かった・悪かった」ではなく、<strong>数字で判断</strong>することが広告運用の鉄則です。
+        </div>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>月間レポートの作成（表示回数・クリック数・CV数・消化費用）</strong>
+              <span class="item-sub">下記の「効果測定ダッシュボード」に実績値を記入して保存する</span>
+            </div>
+            <span class="item-badge">Day 28〜29</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>CPA（顧客獲得単価）の計算：目標¥6,000〜¥10,000</strong>
+              <span class="item-sub">CPA = 広告費 ÷ CV数。例：¥30,000 ÷ 5件 = ¥6,000 → 目標達成</span>
+            </div>
+            <span class="item-badge">Day 29</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>ROAS（費用対効果）の計算</strong>
+              <span class="item-sub">ROAS = OEM受注売上 ÷ 広告費 × 100(%)。1件¥300,000受注なら ROAS = 1000%</span>
+            </div>
+            <span class="item-badge">Day 29〜30</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>ABテスト結果を確認し、勝ちパターンの広告文を採用</strong>
+              <span class="item-sub">CTRが高い方の広告文を本採用。敗れた方は別のパターンでまた挑戦</span>
+            </div>
+            <span class="item-badge">Day 29</span>
+          </li>
+          <li onclick="toggleCheck(this)">
+            <div class="check-box">✓</div>
+            <div class="item-main">
+              <strong>翌月の予算・キーワード・LP改善計画を文書化</strong>
+              <span class="item-sub">目標CPAを達成できていたら予算増額を検討。未達成の場合はLP改善を優先する</span>
+            </div>
+            <span class="item-badge green">翌月計画</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== KPI DASHBOARD ===== -->
+<div class="section-card avoid-break">
+  <div class="section-header">
+    <span class="icon">📊</span>
+    <h2>効果測定ダッシュボード ── 週次記録表</h2>
+  </div>
+  <div class="section-body">
+    <p style="font-size:12px;color:#777;margin-bottom:12px;">📝 印刷して手書きで記入するか、Excelにコピーしてご利用ください。</p>
+    <div style="overflow-x:auto;">
+    <table class="record-table">
+      <thead>
+        <tr>
+          <th>指標</th>
+          <th>Week1</th>
+          <th>Week2</th>
+          <th>Week3</th>
+          <th>Week4</th>
+          <th>月計・平均</th>
+          <th class="target-col">目標値</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>広告表示回数（IMP）</td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="target-col">月2,000回以上</td>
+        </tr>
+        <tr>
+          <td>クリック数</td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="target-col">月60〜100回</td>
+        </tr>
+        <tr>
+          <td>クリック率（CTR）</td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="target-col">3〜5%</td>
+        </tr>
+        <tr>
+          <td>平均CPC（クリック単価）</td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="target-col">¥300〜¥500</td>
+        </tr>
+        <tr>
+          <td>消化予算</td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="target-col">¥30,000以内</td>
+        </tr>
+        <tr>
+          <td>問い合わせ数（CV）</td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="target-col">月3〜5件</td>
+        </tr>
+        <tr>
+          <td>CPA（獲得単価）</td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="target-col">¥6,000〜¥10,000</td>
+        </tr>
+        <tr>
+          <td>品質スコア（平均）</td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="input-cell"></td>
+          <td class="target-col">7以上</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">※ CPA = 消化予算 ÷ CV数　／　ROAS(%) = OEM受注売上 ÷ 広告費 × 100</p>
+  </div>
+</div>
+
+<!-- PAGE BREAK FOR PRINT -->
+<div class="page-break"></div>
+
+<!-- ===== KPI GUIDE ===== -->
+<div class="section-card avoid-break">
+  <div class="section-header">
+    <span class="icon">🎯</span>
+    <h2>重要KPI 解説 ── 何を見て何を判断するか</h2>
+  </div>
+  <div class="section-body">
+    <div style="overflow-x:auto;">
+    <table class="kpi-table">
+      <thead>
+        <tr>
+          <th style="width:20%">指標</th>
+          <th style="width:22%">目標値</th>
+          <th>意味・判断基準</th>
+          <th style="width:20%">この数値が悪いとき</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>IMP</strong><br><span style="font-size:10px;color:#888">表示回数</span></td>
+          <td><span class="kpi-num">月2,000回以上</span></td>
+          <td>広告がどれだけ表示されたか。少ない場合は予算・入札単価・キーワードの見直しが必要</td>
+          <td>入札単価を上げる・キーワードを追加する</td>
+        </tr>
+        <tr>
+          <td><strong>CTR</strong><br><span style="font-size:10px;color:#888">クリック率</span></td>
+          <td><span class="kpi-num">3〜5%</span></td>
+          <td>表示された広告が何%クリックされたか。広告文の訴求力を示す指標</td>
+          <td>広告文の見出し・説明文を変更する</td>
+        </tr>
+        <tr>
+          <td><strong>CPC</strong><br><span style="font-size:10px;color:#888">クリック単価</span></td>
+          <td><span class="kpi-num">¥300〜¥500</span></td>
+          <td>1クリックあたりのコスト。品質スコアが高いほど安くなる</td>
+          <td>品質スコアを上げる・LP改善</td>
+        </tr>
+        <tr>
+          <td><strong>CV数</strong><br><span style="font-size:10px;color:#888">問い合わせ数</span></td>
+          <td><span class="kpi-num">月3〜5件</span></td>
+          <td>広告経由で問い合わせフォームが送信された件数。最終的な成果指標</td>
+          <td>LPを改善する・キーワードを見直す</td>
+        </tr>
+        <tr>
+          <td><strong>CPA</strong><br><span style="font-size:10px;color:#888">獲得単価</span></td>
+          <td><span class="kpi-num">¥6,000〜¥10,000</span></td>
+          <td>1件の問い合わせを得るためにかかったコスト。低いほど効率的</td>
+          <td>除外KW強化・LP改善・広告文修正</td>
+        </tr>
+        <tr>
+          <td><strong>ROAS</strong><br><span style="font-size:10px;color:#888">費用対効果</span></td>
+          <td><span class="kpi-num">500%以上</span></td>
+          <td>広告費に対してどれだけ売上を得たか。1件¥300,000受注なら ROAS=1,000%</td>
+          <td>受注単価の高い案件に特化する</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== JUDGMENT FLOW ===== -->
+<div class="section-card avoid-break">
+  <div class="section-header">
+    <span class="icon">🔀</span>
+    <h2>判断フロー ── 「続けるべきか？止めるべきか？」</h2>
+  </div>
+  <div class="section-body">
+    <div class="flow-box" style="max-width:300px;margin:0 auto 4px;">
+      📊 広告を2週間運用した
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-row">
+      <div class="flow-condition">
+        <div class="cond-label">⚠️ IMPが少ない（月500回未満）</div>
+        <div class="cond-action">
+          → 入札単価を引き上げる<br>
+          → キーワードを追加・拡張する<br>
+          → マッチタイプを「フレーズ一致」に変更
+        </div>
+      </div>
+      <div class="flow-condition">
+        <div class="cond-label">⚠️ CTRが低い（1%未満）</div>
+        <div class="cond-action">
+          → 広告文の見出しを変更する<br>
+          → キーワードと広告文の関連性を高める<br>
+          → 表示オプションを追加する
+        </div>
+      </div>
+      <div class="flow-condition">
+        <div class="cond-label">⚠️ クリックあるがCV=0</div>
+        <div class="cond-action">
+          → LPのファーストビューを改善<br>
+          → 問い合わせボタンを目立たせる<br>
+          → フォームの入力項目を減らす
+        </div>
+      </div>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-row">
+      <div class="flow-good" style="max-width:100%;">
+        <div class="cond-label">✅ CV獲得・CPA目標達成（¥6,000〜¥10,000）</div>
+        <div class="cond-action">
+          → 予算の増額を検討（現在の1.5〜2倍）<br>
+          → 成功キーワードへの入札強化<br>
+          → 類似キーワードの追加で拡張<br>
+          → 翌月は月¥50,000〜¥100,000規模に拡大
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:10px;">※ 3ヶ月間データを蓄積してからAI自動入札（スマート入札）への切り替えを検討してください</div>
+  </div>
+</div>
+
+<!-- ===== KEYWORD LIST ===== -->
+<div class="section-card">
+  <div class="section-header">
+    <span class="icon">🔑</span>
+    <h2>縫製工場専用 推奨キーワードリスト 20選</h2>
+  </div>
+  <div class="section-body">
+
+    <p class="sub-title">🎯 顕在層キーワード（高コンバージョン期待）</p>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="kw-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>キーワード</th>
+          <th>検索意図</th>
+          <th>推定CPC</th>
+          <th>推奨入札単価</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="kw-pill">縫製工場 東京 OEM</span></td>
+          <td>OEM依頼先を探している</td>
+          <td class="cpc-val">¥200〜400</td>
+          <td>¥350</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="kw-pill">アパレル 小ロット 縫製</span></td>
+          <td>少量生産できる工場を探している</td>
+          <td class="cpc-val">¥250〜500</td>
+          <td>¥400</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="kw-pill">国内縫製 ブランド立ち上げ</span></td>
+          <td>新ブランドの生産パートナーを探している</td>
+          <td class="cpc-val">¥300〜600</td>
+          <td>¥450</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="kw-pill">ニット 縫製 サンプル 東京</span></td>
+          <td>サンプル製作ができる工場を探している</td>
+          <td class="cpc-val">¥150〜350</td>
+          <td>¥300</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="kw-pill">洋服 OEM 東京 小ロット</span></td>
+          <td>小ロットのOEM工場を探している</td>
+          <td class="cpc-val">¥200〜450</td>
+          <td>¥350</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="kw-pill">縫製 委託 世田谷</span></td>
+          <td>近隣の縫製工場を探している</td>
+          <td class="cpc-val">¥100〜250</td>
+          <td>¥200</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="kw-pill">MADE IN JAPAN 縫製工場</span></td>
+          <td>国内製造にこだわりたい</td>
+          <td class="cpc-val">¥200〜400</td>
+          <td>¥350</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="kw-pill">アパレル OEM サンプル 1枚</span></td>
+          <td>1枚からサンプルを作りたい</td>
+          <td class="cpc-val">¥150〜350</td>
+          <td>¥280</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><span class="kw-pill">縫製工場 パターン 製作 東京</span></td>
+          <td>パターンから依頼できる工場を探している</td>
+          <td class="cpc-val">¥200〜400</td>
+          <td>¥320</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><span class="kw-pill">ファッション ブランド 縫製 依頼</span></td>
+          <td>ブランド立ち上げの縫製パートナーを探している</td>
+          <td class="cpc-val">¥250〜500</td>
+          <td>¥400</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <p class="sub-title" style="margin-top:18px;">🚫 除外キーワード（無駄なクリックを防ぐ）</p>
+    <div style="overflow-x:auto;margin-top:10px;">
+    <table class="kw-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>除外キーワード</th>
+          <th>除外する理由</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><span class="kw-pill exclude">縫製 やり方</span></td>
+          <td>個人が縫製方法を調べる検索。BtoBに無関係</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><span class="kw-pill exclude">ミシン 修理</span></td>
+          <td>ミシンの修理業者を探す検索。依頼につながらない</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="kw-pill exclude">型紙 独学</span></td>
+          <td>ハンドメイド愛好者の検索。法人客ではない</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><span class="kw-pill exclude">縫製 求人</span></td>
+          <td>求職者の検索。採用目的でなければ除外</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><span class="kw-pill exclude">縫製 習い事</span></td>
+          <td>縫製教室を探す個人の検索</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><span class="kw-pill exclude">裁縫 初心者</span></td>
+          <td>DIY目的の個人検索</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><span class="kw-pill exclude">ミシン おすすめ</span></td>
+          <td>ミシン購入を検討している個人の検索</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><span class="kw-pill exclude">服 リメイク 個人</span></td>
+          <td>個人のリメイク需要。小口すぎてBtoB工場向きではない</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><span class="kw-pill exclude">縫製 学校</span></td>
+          <td>縫製スクール・専門学校を探す検索</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><span class="kw-pill exclude">無料 縫製</span></td>
+          <td>無料サービスを探している検索。受注につながらない</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BREAK FOR PRINT -->
+<div class="page-break"></div>
+
+<!-- ===== FAILURES ===== -->
+<div class="section-card">
+  <div class="section-header">
+    <span class="icon">⚠️</span>
+    <h2>よくある失敗5選 と 対処法</h2>
+  </div>
+  <div class="section-body">
+
+    <div class="failure-item avoid-break">
+      <div class="failure-title">❌ 失敗1：設定だけして「放置運用」</div>
+      <div class="failure-body">
+        広告を開始して最初の1週間だけ確認し、あとは放置するパターン。Googleの自動入札AIはデータが少ない初期段階では精度が低く、関係のない検索語句に予算を消化し続けます。
+      </div>
+      <div class="failure-solution">週2回以上、検索語句レポートを確認し不要なキーワードを除外してください。最低でも週1回は管理画面を確認する習慣を。</div>
+    </div>
+
+    <div class="failure-item avoid-break">
+      <div class="failure-title">❌ 失敗2：広告費を使い切っても問い合わせゼロ（LP問題）</div>
+      <div class="failure-body">
+        クリック数は十分あるのに問い合わせが来ない場合、問題は広告ではなくランディングページ（LP）にあります。「縫製OEMの工場」と3秒で伝わらないサイト、スマホで見にくいフォーム、問い合わせボタンが分かりにくいLPは機会損失を生み出します。
+      </div>
+      <div class="failure-solution">LPのスマホ表示を確認し、ファーストビューに「小ロットOEM対応」「世田谷の縫製工場」を明記。問い合わせフォームは3項目以内に絞る。</div>
+    </div>
+
+    <div class="failure-item avoid-break">
+      <div class="failure-title">❌ 失敗3：BtoC向けの一般的なキーワードで配信</div>
+      <div class="failure-body">
+        「縫製」「洋服 オーダー」などの一般的なキーワードは個人消費者も多く検索します。BtoBの縫製工場に対して個人からのクリックが発生すると、コンバージョンにつながらない費用が積み重なります。
+      </div>
+      <div class="failure-solution">「法人向け」「OEM」「量産」などB2B文脈のキーワードに絞り、広告文にも「法人・ブランド向け」と明記する。</div>
+    </div>
+
+    <div class="failure-item avoid-break">
+      <div class="failure-title">❌ 失敗4：予算を一気に大きくしすぎる</div>
+      <div class="failure-body">
+        「どうせやるなら月50万円」と最初から大きな予算を投入するのは危険です。正しい設定ができていない状態で大予算を投下すると、損失も大きくなります。縫製工場向けのBtoB広告はデータ収集に時間がかかります。
+      </div>
+      <div class="failure-solution">最初は月¥30,000〜¥50,000でスタート。3ヶ月間でCPA目標を達成できたことを確認してから予算を1.5〜2倍に拡大する。</div>
+    </div>
+
+    <div class="failure-item avoid-break">
+      <div class="failure-title">❌ 失敗5：代理店に「丸投げ」でブラックボックス化</div>
+      <div class="failure-body">
+        代理店に任せること自体は悪くありませんが、「月30万円お願いします」と丸投げしてCPAも確認しないのは危険です。成果につながらないキーワードで予算を消化されても気づけません。
+      </div>
+      <div class="failure-solution">代理店を使う場合でも「月次レポートでCPA・CV数・消化予算」は必ず自分で確認する。管理画面の閲覧権限を必ず取得しておく。</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== BUDGET PHASES ===== -->
+<div class="section-card avoid-break">
+  <div class="section-header">
+    <span class="icon">🚀</span>
+    <h2>予算ロードマップ ── 3ヶ月後の成長イメージ</h2>
+  </div>
+  <div class="section-body">
+    <div class="two-col">
+      <div class="calc-box">
+        <h4>📅 1ヶ月目（テスト期）</h4>
+        <div class="calc-row"><span class="calc-label">月額予算</span><span class="calc-val">¥30,000〜67,000</span></div>
+        <div class="calc-row"><span class="calc-label">プロモクレジット</span><span class="calc-val">+¥67,000</span></div>
+        <hr class="calc-divider">
+        <div class="calc-row"><span class="calc-label">目標CV数</span><span class="calc-val">月3〜5件</span></div>
+        <div class="calc-row"><span class="calc-label">目標CPA</span><span class="calc-val">¥6,000〜10,000</span></div>
+      </div>
+      <div class="calc-box">
+        <h4>📅 2〜3ヶ月目（成長期）</h4>
+        <div class="calc-row"><span class="calc-label">月額予算</span><span class="calc-val">¥50,000〜100,000</span></div>
+        <div class="calc-row"><span class="calc-label">勝ちKW集中投資</span><span class="calc-val">入札最適化</span></div>
+        <hr class="calc-divider">
+        <div class="calc-row"><span class="calc-label">目標CV数</span><span class="calc-val">月5〜10件</span></div>
+        <div class="calc-row"><span class="calc-label">AI自動入札切替</span><span class="calc-val">データ50件〜</span></div>
+      </div>
+    </div>
+    <div class="gold-box" style="margin-top:16px;">
+      <strong>💡 B2B製造業の広告費の目安（売上比）：1〜3%</strong><br>
+      年商3,000万円の縫製工場であれば、年間広告費30〜90万円（月2.5〜7.5万円）が業界標準の投資水準です。<br>
+      まずは月¥30,000でデータを取り、ROIが確認できたら段階的に拡大することが最も安全な戦略です。
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <strong>Google広告 30日間ロードマップ｜東京都世田谷区 縫製工場（アパレルOEM・BtoB）向け</strong><br>
+  <br>
+  このガイドは情報提供を目的としています。Google広告の仕様・費用は市場状況により変動します。<br>
+  最新情報は <a href="https://ads.google.com" style="color:#c9a84c;">Google広告公式サイト（ads.google.com）</a> をご確認ください。
+</div>
+
+<script>
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const box = li.querySelector('.check-box');
+  if (li.classList.contains('checked')) {
+    box.style.background = '#c9a84c';
+    box.style.borderColor = '#c9a84c';
+    box.style.color = 'white';
+  } else {
+    box.style.background = '';
+    box.style.borderColor = '';
+    box.style.color = 'transparent';
+  }
+}
+</script>
+</body>
+</html>
